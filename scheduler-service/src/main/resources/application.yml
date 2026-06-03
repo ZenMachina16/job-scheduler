@@ -12,3 +12,22 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  quartz:
+    job-store-type: jdbc
+
+    jdbc:
+      initialize-schema: never
+
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: JobScheduler
+
+          jobStore:
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+            tablePrefix: qrtz_
+            isClustered: false
+
+          threadPool:
+            threadCount: 5
