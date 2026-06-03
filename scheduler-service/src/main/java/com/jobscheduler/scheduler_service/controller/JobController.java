@@ -2,6 +2,7 @@ package com.jobscheduler.scheduler_service.controller;
 
 import com.jobscheduler.scheduler_service.entity.Job;
 import com.jobscheduler.scheduler_service.service.JobService;
+import org.quartz.SchedulerException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class JobController {
     }
 
     @PostMapping
-    public Job create(@RequestBody Job job) {
+    public Job create(@RequestBody Job job) throws SchedulerException {
         return jobService.createJob(job);
     }
 
