@@ -1,11 +1,20 @@
 package com.jobscheduler.scheduler_service.jobs;
 
-import org.quartz.Job;
+import com.jobscheduler.scheduler_service.entity.Job;
+import com.jobscheduler.scheduler_service.repository.JobRepository;
+import com.jobscheduler.scheduler_service.service.JobDispatchProducer;
 import org.quartz.JobExecutionContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SimpleJob implements Job {
+public class SimpleJob implements org.quartz.Job {
+
+    @Autowired
+    private JobRepository jobRepository;
+
+    @Autowired
+    private JobDispatchProducer producer;
 
     @Override
     public void execute(JobExecutionContext context) {
@@ -14,8 +23,10 @@ public class SimpleJob implements Job {
             context.getMergedJobDataMap()
                    .getString("jobId");
 
-        System.out.println(
-            "Executing Quartz Job: " + jobId
-        );
+        Job job =
+            jobRepository.findById(jobId)
+                         .orElseThrow();
+
+        producer.dispatch(job);
     }
 }

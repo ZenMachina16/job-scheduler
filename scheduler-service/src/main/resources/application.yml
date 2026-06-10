@@ -24,6 +24,7 @@ spring:
         quartz:
           scheduler:
             instanceName: JobScheduler
+            
 
           jobStore:
             driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
@@ -32,3 +33,7 @@ spring:
 
           threadPool:
             threadCount: 5
+            
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
