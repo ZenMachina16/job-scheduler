@@ -1,4 +1,4 @@
-package com.jobscheduler.scheduler_service.event;
+package com.jobexecutor.executor_service.event;
 
 public record JobDispatchEvent(
         String jobId,
