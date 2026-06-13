@@ -21,6 +21,15 @@ public class Job {
 
     private LocalDateTime createdAt;
 
+    private String lastStatus;
+
+    @Column(length = 5000)
+    private String lastOutput;
+
+    private Long lastDurationMs;
+
+    private LocalDateTime lastRunAt;    
+
     @PrePersist
     public void prePersist() {
         createdAt = LocalDateTime.now();
@@ -73,5 +82,37 @@ public class Job {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getLastStatus() {
+        return lastStatus;
+    }
+
+    public void setLastStatus(String lastStatus) {
+        this.lastStatus = lastStatus;
+    }
+
+    public String getLastOutput() {
+        return lastOutput;
+    }
+
+    public void setLastOutput(String lastOutput) {
+        this.lastOutput = lastOutput;
+    }
+
+    public Long getLastDurationMs() {
+        return lastDurationMs;
+    }
+
+    public void setLastDurationMs(Long lastDurationMs) {
+        this.lastDurationMs = lastDurationMs;
+    }
+
+    public LocalDateTime getLastRunAt() {
+        return lastRunAt;
+    }
+
+    public void setLastRunAt(LocalDateTime lastRunAt) {
+        this.lastRunAt = lastRunAt;
     }
 }
